@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Age calculator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+
+    .box1 {
+      background-color: aqua;
+    }
+    
+    .form1 {
+      display: flex;
+      justify-content: center;
+    }
+
+    .image1 {
+      position: fixed;
+      top: 30px; /* Adjust the value as needed to position the image button */
+      right: 30px; /* Adjust the value as needed to position the image button */
+      width: 100px; /* Adjust the width of the button */
+      height: 100px; /* Adjust the height of the button */
+      background-color: #f9f9f9; /* Button background color */
+      border-radius: 50%; /* Make it circular */
+    }
+
+    .image1 img {
+      width: 100%; /* Adjust the size of the image inside the button */
+    }
+
+    .attribution { 
+      font-size: 11px; 
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #f9f9f9;
+      padding: 10px;
+     }
+    .attribution a { color: hsl(228, 45%, 44%); }
+
+    input {
+      display: inline-block;
+      width: 6em;
+      position: relative;
+      top: 1em;
+    }
+
+    label {
+      display: inline-block;
+      width: 6em;
+      margin-right: .5em;
+      padding-top: .5em;
+    }
+
+    .age-result {
+      text-align: center;
+      font-size: 100px;
+      margin-top: 100px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: bold;
+    }
+    .age-result div {
+      margin-bottom: 10px; /* Adjust the value as needed for greater or lesser separation */
+    }
+
+    .age-result span {
+      font-weight: bolder;
+      color: purple;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="box1">
+    <div class="form1">
+      <form id="sg1">
+        <label>Day <input name="DD" id="DD"/></label>
+        <label>Month<input name="MM" id="MM"/></label>
+        <label>Year <input name="YYYY" id="YYYY"/></label>
+      </form>
+    </div>
+      
+    <div class="image1">
+      <img src="assets/images/arrow1.png" alt="arrow1" id="calculateAge">
+    </div>
+  
+    <div class="age-result" id="ageResult">
+      <!-- Age will be displayed here with separate div elements for each line -->
+      <div id="years"><span>--</span> years</div>
+      <div id="months"><span>--</span> months</div>
+      <div id="days"><span>--</span> days</div>
+    </div>
+    
+  
+    
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+      Coded by <a href="#">Rahul Krishnagiri</a>.
+    </div>
+  </div>
+  
+
+  <script>
+    document.getElementById('calculateAge').addEventListener('click', function() {
+      const day = parseInt(document.getElementById('DD').value);
+      const month = parseInt(document.getElementById('MM').value);
+      const year = parseInt(document.getElementById('YYYY').value);
+
+      // Create a Date object for the current date and time
+      const currentDate = new Date();
+
+      // Calculate age based on the input values and current date
+      const birthDate = new Date(year, month - 1, day);
+      const ageInMilliseconds = currentDate - birthDate;
+      const ageInSeconds = ageInMilliseconds / 1000;
+      const ageInYears = Math.floor(ageInSeconds / (60 * 60 * 24 * 365.25));
+      const remainingSeconds = ageInSeconds - (ageInYears * 60 * 60 * 24 * 365.25);
+      const ageInMonths = Math.floor(remainingSeconds / (60 * 60 * 24 * 30.44));
+      const remainingDays = Math.floor(remainingSeconds / (60 * 60 * 24));
+      
+      // Update the result div with the age
+      document.getElementById('years').innerHTML = `<span>${ageInYears}</span> years`;
+    document.getElementById('months').innerHTML = `<span>${ageInMonths}</span> months`;
+    document.getElementById('days').innerHTML = `<span>${remainingDays}</span> days`;
+    });
+  </script>
+</body>
+</html>
